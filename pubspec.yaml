@@ -1,0 +1,13 @@
+name: flutter_design_system_template
+description: Token based Flutter design system
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_screenutil: ^5.9.3
+  gap: ^3.0.1
+
+flutter:
+  uses-material-design: true
