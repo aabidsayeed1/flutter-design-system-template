@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-//dart run generator/generate_tokens.dart
+// ❯ dart run lib/core/design_system/generator/generate_tokens.dart
 void main() {
-  final file = File('tokens.json');
-
+  final file = File('lib/core/design_system/generator/tokens.json');
   final data = jsonDecode(file.readAsStringSync());
 
   generateColors(data);
@@ -16,6 +15,8 @@ void main() {
   generateTypography(data);
 
   generateDimensions(data);
+
+  updateTokenFiles();
 
   print("All tokens generated");
 }
@@ -285,10 +286,110 @@ $unit;
   return buffer.toString();
 }
 
-void writeFile(String name, String content) {
-  final file = File('../generated/$name');
+void updateTokenFiles() {
+  final configs = {
+    "color_tokens.dart": {
+      "className": "ColorTokens",
+      "extends": "GeneratedLightColorTokens",
+      "dark": true,
+      "imports": [
+        "../generated/generated_color_tokens.dart",
+      ],
+    },
+    "spacing_tokens.dart": {
+      "className": "SpacingTokens",
+      "extends": "GeneratedSpacingTokens",
+      "imports": [
+        "../generated/generated_spacing_tokens.dart",
+      ],
+    },
+    "radius_tokens.dart": {
+      "className": "RadiusTokens",
+      "extends": "GeneratedRadiusTokens",
+      "imports": [
+        "../generated/generated_radius_tokens.dart",
+      ],
+    },
+    "typography_tokens.dart": {
+      "className": "TypographyTokens",
+      "extends": "GeneratedTypographyTokens",
+      "imports": [
+        "../generated/generated_typography_tokens.dart",
+      ],
+    },
+    "dimension_tokens.dart": {
+      "className": "DimensionTokens",
+      "extends": "GeneratedDimensionTokens",
+      "imports": [
+        "../generated/generated_dimension_tokens.dart",
+      ],
+    },
+  };
 
-  file.createSync(recursive: true);
+  configs.forEach((fileName, config) {
+    final path = 'lib/core/design_system/tokens/$fileName';
+
+    final file = File(path);
+
+    if (!file.existsSync()) {
+      return;
+    }
+
+    String content = file.readAsStringSync();
+
+    // add missing imports
+    final imports = config["imports"] as List<String>;
+
+    final importBlock = imports.map((e) => "import '$e';").join("\n");
+
+    if (!content.contains(importBlock)) {
+      content = "$importBlock\n\n$content";
+    }
+
+    final String className = config["className"] as String;
+
+    final String extendsName = config["extends"] as String;
+
+    // update only class declaration
+    content = content.replaceFirst(
+      RegExp(
+        r'class\s+' + className!,
+      ),
+      'class $className extends $extendsName',
+    );
+
+    // add dark class if color token
+    if (config["dark"] == true && !content.contains("DarkColorTokens")) {
+      content += """
+
+
+
+class DarkColorTokens extends GeneratedDarkColorTokens {
+
+  const DarkColorTokens();
+
+}
+
+""";
+    }
+
+    file.writeAsStringSync(content);
+  });
+}
+
+void writeFile(
+  String name,
+  String content,
+) {
+  final directory = Directory('lib/core/design_system/generated');
+
+  if (!directory.existsSync()) {
+    directory.createSync(
+      recursive: true,
+    );
+  }
+
+  final file = File('${directory.path}/$name');
 
   file.writeAsStringSync(content);
 }

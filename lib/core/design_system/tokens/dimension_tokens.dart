@@ -1,10 +1,8 @@
-import '../generated/generated_dimension_tokens.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../responsive/responsive_value.dart';
 
-class DimensionTokens extends GeneratedDimensionTokens {
+class DimensionTokens {
   const DimensionTokens();
   double buttonHeight(context) {
     return ResponsiveValue<double>(
