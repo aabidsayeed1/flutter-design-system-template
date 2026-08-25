@@ -1,0 +1,58 @@
+{
+  "themes": {
+    "light": {
+      "colors": {
+        "primary": "#2563EB",
+        "secondary": "#7C3AED",
+        "background": "#FFFFFF"
+      },
+      "gradients": {
+        "brand": {
+          "type": "linear",
+          "begin": "topLeft",
+          "end": "bottomRight",
+          "colors": ["primary", "unknownColor"]
+        }
+      }
+    },
+    "dark": {
+      "colors": {
+        "primary": "#60A5FA",
+        "secondary": "#A78BFA",
+        "background": "#111827"
+      },
+      "gradients": {
+        "brand": {
+          "type": "linear",
+          "begin": "topLeft",
+          "end": "bottomRight",
+          "colors": ["primary", "unknownColor"]
+        }
+      }
+    }
+  },
+  "spacing": {
+    "sm": {"mobile": 4, "tablet": 8, "desktop": 12}
+  },
+  "radius": {
+    "md": {"mobile": 4, "tablet": 8, "desktop": 12}
+  },
+  "elevations": {
+    "level1": {"mobile": 1, "tablet": 1, "desktop": 1}
+  },
+  "typography": {
+    "body": {
+      "size": {"mobile": 12, "tablet": 14, "desktop": 16},
+      "weight": 400,
+      "color": "primary"
+    }
+  },
+  "dimensions": {
+    "buttonHeight": {
+      "type": "height",
+      "mobile": 40,
+      "tablet": 44,
+      "desktop": 48
+    }
+  }
+}

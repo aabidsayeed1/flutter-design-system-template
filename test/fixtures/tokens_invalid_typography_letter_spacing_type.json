@@ -1,0 +1,36 @@
+{
+  "themes": {
+    "light": {
+      "colors": {
+        "primary": "#2563EB",
+        "background": "#FFFFFF"
+      }
+    }
+  },
+  "spacing": {
+    "sm": {"mobile": 4, "tablet": 8, "desktop": 12}
+  },
+  "radius": {
+    "md": {"mobile": 4, "tablet": 8, "desktop": 12}
+  },
+  "elevations": {
+    "level1": {"mobile": 1, "tablet": 1, "desktop": 1}
+  },
+  "typography": {
+    "body": {
+      "size": {"mobile": 12, "tablet": 14, "desktop": 16},
+      "weight": 400,
+      "lineHeight": {"mobile": 18, "tablet": 20, "desktop": 22},
+      "letterSpacing": "0.3",
+      "color": "primary"
+    }
+  },
+  "dimensions": {
+    "buttonHeight": {
+      "type": "height",
+      "mobile": 40,
+      "tablet": 44,
+      "desktop": 48
+    }
+  }
+}

@@ -1,10 +1,12 @@
+import '../generated/generated_radius_tokens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../responsive/responsive_value.dart';
 
-class RadiusTokens {
+class RadiusTokens extends GeneratedRadiusTokens {
   const RadiusTokens();
 
+  @override
   double md(context) {
     return ResponsiveValue<double>(
       mobile: 10,

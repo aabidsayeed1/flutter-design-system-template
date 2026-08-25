@@ -11,13 +11,17 @@ void main() {
 class App extends StatelessWidget {
   const App({super.key});
 
+  static const String brandThemeName = 'aurora';
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(390, 844),
+      designSize: AppTheme.designSize(context),
       builder: (_, child) {
         return MaterialApp(
-          theme: AppTheme.light,
+          theme: AppTheme.theme(brandThemeName),
+          darkTheme: AppTheme.dark,
+          themeMode: ThemeMode.system,
           home: child,
         );
       },
